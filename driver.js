@@ -10,8 +10,8 @@ const events = require('./events');
 events.on('pickup', async (payload) => {
 
   await setTimeout(() => {
-    console.log(`DRIVER: picked up order ${payload.orderId}`);
-    events.emit('in-transit', payload);
+    console.log(`DRIVER: picked up ${payload.orderId}`);
+    events.emit('in-transit', { storeName: `${payload.storeName}`, orderId: `${payload.orderId}`, customerName: `${payload.customerName}`, address: `${payload.address}` });
   }, 1000);
 
 
@@ -25,7 +25,7 @@ events.on('pickup', async (payload) => {
     console.log(`DRIVER: Just Delivered ${payload.orderId}`);
     console.log(`VENDOR:Thank you for delivering ${payload.orderID} `);
 
-    events.emit('delivered', { orderId: payload.orderId, storeName: payload.storeName, customerName: payload.customerName, address: payload.address });
+    events.emit('delivered', { storeName: `${payload.storeName}`, orderId: `${payload.orderId}`, customerName: `${payload.customerName}`, address: `${payload.address}` });
 
   }, 3000);
 });

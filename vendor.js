@@ -4,6 +4,7 @@
 // note: here i wanted to use the faker.js 
 const faker = require('faker');
 require('./driver');
+require('./caps')
 const events = require('./events');
 
 
@@ -21,7 +22,8 @@ const timeInterval = setInterval(() => {
 
   // emit the pickup event, and attach the info as a payload
 
-  console.log(events.emit('pickup', fakeOrder));
+  console.log(events.emit('pickup', { storeName: `${storeName}`, orderId: `${orderId}`, customerName: `${customerName}`, address: `${address}` })
+  );
   if (count === 0) {
     clearInterval(interval)
   }
