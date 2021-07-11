@@ -1,15 +1,40 @@
 'use strict';
 const events = require('./events');
+require('./driver');
+require('./vendor');
 
 
-events.on('pickup', (payload) => logIt('pickup', payload));
-events.on('in-transit', (payload) => logIt('in-transit', payload));
-events.on('delivered', (payload) => logIt('delivered', payload));
+// ------------ pick up -----------
+
+events.on('capPickup', payload => {
+  console.log('EVENT:', {
+    event: 'pick-up',
+    time: new Date(),
+    payload: payload
+  });
+  events.emit('driverPickup', payload);
+});
+// -----------transit -------------
+
+events.on('capInTransit', payload => {
+  console.log('EVENT:', {
+    event: 'transit',
+    time: new Date(),
+    payload: payload
+  });
+  events.emit('driverInTransit', payload);
+});
 
 
-function logIt(event, payload) {
-  console.log('EVENT', { event, time: new Date().toLocaleString(), payload });
-}
 
 
+// ----------- delivered ---------
+events.on('capDelivered', payload => {
+  console.log('Event:', {
+    event: 'delivered',
+    time: new Date(),
+    payload: payload
+  });
+  events.emit('driverDelivered', payload);
+});
 
