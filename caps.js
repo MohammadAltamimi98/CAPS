@@ -12,10 +12,8 @@ events.on('capPickup', payload => {
     time: new Date(),
     payload: payload
   });
-
+  events.emit('driverPickup', payload);
 });
-events.emit('DriverPickup', payload);
-
 // -----------transit -------------
 
 events.on('capInTransit', payload => {
@@ -24,9 +22,10 @@ events.on('capInTransit', payload => {
     time: new Date(),
     payload: payload
   });
+  events.emit('driverInTransit', payload);
 });
 
-events.emit('driverInTransit', payload);
+
 
 
 // ----------- delivered ---------
@@ -36,6 +35,6 @@ events.on('capDelivered', payload => {
     time: new Date(),
     payload: payload
   });
+  events.emit('driverDelivered', payload);
 });
 
-events.emit('DriverDelivered', payload);
