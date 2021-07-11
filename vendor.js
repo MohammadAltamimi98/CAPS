@@ -1,4 +1,6 @@
 'use strict';
+require('dotenv').config();
+
 // note: here i wanted to use the faker.js 
 const faker = require('faker');
 require('./driver');
